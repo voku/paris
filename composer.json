@@ -1,43 +1,60 @@
 {
-    "name": "j4mie/paris",
-    "type": "library",
-    "description": "A lightweight Active Record implementation for PHP5, built on top of Idiorm",
-    "keywords": ["paris", "orm", "active record", "model"],
-    "homepage": "http://j4mie.github.com/idiormandparis",
-    "support": {
-        "issues": "https://github.com/j4mie/paris/issues",
-        "source": "https://github.com/j4mie/paris"
+  "name": "j4mie/paris",
+  "type": "library",
+  "description": "A lightweight Active Record implementation for PHP5, built on top of Idiorm",
+  "keywords": [
+    "paris",
+    "orm",
+    "active record",
+    "model"
+  ],
+  "homepage": "http://j4mie.github.com/idiormandparis",
+  "support": {
+    "issues": "https://github.com/j4mie/paris/issues",
+    "source": "https://github.com/j4mie/paris"
+  },
+  "authors": [
+    {
+      "name": "Jamie Matthews",
+      "email": "jamie.matthews@gmail.com",
+      "homepage": "http://j4mie.org",
+      "role": "Developer"
     },
-    "authors": [
-        {
-            "name": "Jamie Matthews",
-            "email": "jamie.matthews@gmail.com",
-            "homepage": "http://j4mie.org",
-            "role": "Developer"
-        },
-        {
-            "name": "Simon Holywell",
-            "email": "treffynnon@php.net",
-            "homepage": "http://simonholywell.com",
-            "role": "Maintainer"
-        },
-        {
-            "name": "Durham Hale",
-            "email": "me@durhamhale.com",
-            "homepage": "http://durhamhale.com",
-            "role": "Maintainer"
-        }
-    ],
-    "license": [
-        "BSD-2-Clause",
-        "BSD-3-Clause",
-        "BSD-4-Clause"
-    ],
-    "require": {
-        "php": ">=5.2.0",
-        "j4mie/idiorm": "1.5.*"
+    {
+      "name": "Simon Holywell",
+      "email": "treffynnon@php.net",
+      "homepage": "http://simonholywell.com",
+      "role": "Maintainer"
     },
-    "autoload": {
-        "classmap": ["paris.php"]
+    {
+      "name": "Durham Hale",
+      "email": "me@durhamhale.com",
+      "homepage": "http://durhamhale.com",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Lars Moelleken",
+      "email": "lars@moelleken.org",
+      "homepage": "http://www.moelleken.org/",
+      "role": "Fork-Maintainer"
     }
+  ],
+  "license": [
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSD-4-Clause"
+  ],
+  "require": {
+    "php": ">=5.2.0",
+    "j4mie/idiorm": "1.5.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "satooshi/php-coveralls": "0.7.*@dev"
+  },
+  "autoload": {
+    "classmap": [
+      "paris.php"
+    ]
+  }
 }
