@@ -208,10 +208,16 @@
          * @param  null|string $default
          * @return string
          */
-        protected static function _get_static_property($class_name, $property, $default=null) {
+        protected static function _get_class_property($class_name, $property, $default=null) {
             if (!class_exists($class_name) || !property_exists($class_name, $property)) {
                 return $default;
             }
+
+            $properties = get_object_vars(new $class_name);
+            if (isset($properties[$property]) && $properties[$property]) {
+                return $properties[$property];
+            }
+
             $properties = get_class_vars($class_name);
             return $properties[$property];
         }
@@ -233,9 +239,9 @@
          * @return string
          */
         protected static function _get_table_name($class_name) {
-            $specified_table_name = self::_get_static_property($class_name, '_table');
+            $specified_table_name = self::_get_class_property($class_name, '_table');
             $use_short_class_name =
-                self::_get_static_property($class_name, '_table_use_short_name');
+                self::_get_class_property($class_name, '_table_use_short_name');
 
             if ($use_short_class_name) {
                 $exploded_class_name = explode('\\', $class_name);
@@ -278,7 +284,7 @@
          * @return string|null
          */
         protected static function _get_id_column_name($class_name) {
-            return self::_get_static_property($class_name, '_id_column', self::DEFAULT_ID_COLUMN);
+            return self::_get_class_property($class_name, '_id_column', self::DEFAULT_ID_COLUMN);
         }
 
         /**
@@ -316,7 +322,7 @@
             $table_name = self::_get_table_name($class_name);
 
             if ($connection_name == null) {
-               $connection_name = self::_get_static_property(
+               $connection_name = self::_get_class_property(
                    $class_name,
                    '_connection_name',
                    ORMWrapper::DEFAULT_CONNECTION
