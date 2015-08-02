@@ -48,11 +48,17 @@ namespace paris\orm;
  *
  * @see     http://www.php-fig.org/psr/psr-1/
  *
- * @method void setOrm()
- * @method $this setExpr()
- * @method bool isDirty()
+ * @method void setOrm($orm)
+ * @method $this setExpr($property, $value=null)
+ * @method bool isDirty($property)
  * @method bool isNew()
  * @method Array asArray()
+ * @method static ORMWrapper belongsTo($string, $custom_fk=null)
+ * @method static ORMWrapper hasOne($string, $custom_fk=null)
+ * @method static ORMWrapper hasMany($string, $custom_fk=null)
+ * @method static ORMWrapper hasManyThrough($string_1, $custom_1_fk=null, $string_2=null, $custom_2_fk=null)
+ * @method static ORMWrapper find_one($id=null)
+ * @method static ORMWrapper find_many()
  *
  * @package paris\orm
  */
@@ -105,7 +111,7 @@ class Model
    * @param  string $method
    * @param  Array  $parameters
    *
-   * @return Array
+   * @return Array|false
    */
   public static function __callStatic($method, $parameters)
   {
@@ -113,6 +119,8 @@ class Model
       $model = self::factory(get_called_class());
 
       return call_user_func_array(array($model, $method), $parameters);
+    } else {
+      return false;
     }
   }
 
@@ -496,17 +504,17 @@ class Model
     $base_table_name = self::_get_table_name(get_class($this));
     $foreign_key_name = self::_build_foreign_key_name($foreign_key_name, $base_table_name);
 
-    $where_value = ''; //Value of foreign_table.{$foreign_key_name} we're
-    //looking for. Where foreign_table is the actual
-    //database table in the associated model.
+    // Value of foreign_table.{$foreign_key_name} we're
+    // looking for. Where foreign_table is the actual
+    // database table in the associated model.
 
     if (is_null($foreign_key_name_in_current_models_table)) {
-      //Match foreign_table.{$foreign_key_name} with the value of
-      //{$this->_table}.{$this->id()}
+      // Match foreign_table.{$foreign_key_name} with the value of
+      // {$this->_table}.{$this->id()}
       $where_value = $this->id();
     } else {
-      //Match foreign_table.{$foreign_key_name} with the value of
-      //{$this->_table}.{$foreign_key_name_in_current_models_table}
+      // Match foreign_table.{$foreign_key_name} with the value of
+      // {$this->_table}.{$foreign_key_name_in_current_models_table}
       $where_value = $this->$foreign_key_name_in_current_models_table;
     }
 
@@ -568,7 +576,7 @@ class Model
    * @param  null|string $foreign_key_name_in_associated_models_table
    * @param  null|string $connection_name
    *
-   * @return $this|null
+   * @return self|null
    */
   protected function belongs_to($associated_class_name, $foreign_key_name = null, $foreign_key_name_in_associated_models_table = null, $connection_name = null)
   {
@@ -579,12 +587,12 @@ class Model
     $desired_record = null;
 
     if (is_null($foreign_key_name_in_associated_models_table)) {
-      //"{$associated_table_name}.primary_key = {$associated_object_id}"
-      //NOTE: primary_key is a placeholder for the actual primary key column's name
-      //in $associated_table_name
+      // "{$associated_table_name}.primary_key = {$associated_object_id}"
+      // NOTE: primary_key is a placeholder for the actual primary key column's name
+      // in $associated_table_name
       $desired_record = self::factory($associated_class_name, $connection_name)->where_id_is($associated_object_id);
     } else {
-      //"{$associated_table_name}.{$foreign_key_name_in_associated_models_table} = {$associated_object_id}"
+      // "{$associated_table_name}.{$foreign_key_name_in_associated_models_table} = {$associated_object_id}"
       $desired_record = self::factory($associated_class_name, $connection_name)->where($foreign_key_name_in_associated_models_table, $associated_object_id);
     }
 
@@ -614,28 +622,31 @@ class Model
     // and the associated class, in alphabetical order.
     if (is_null($join_class_name)) {
       $base_model = explode('\\', $base_class_name);
+
       $base_model_name = end($base_model);
       if (substr($base_model_name, 0, strlen(self::$auto_prefix_models)) == self::$auto_prefix_models) {
         $base_model_name = substr($base_model_name, strlen(self::$auto_prefix_models), strlen($base_model_name));
       }
+
       // Paris wasn't checking the name settings for the associated class.
       $associated_model = explode('\\', $associated_class_name);
       $associated_model_name = end($associated_model);
       if (substr($associated_model_name, 0, strlen(self::$auto_prefix_models)) == self::$auto_prefix_models) {
         $associated_model_name = substr($associated_model_name, strlen(self::$auto_prefix_models), strlen($associated_model_name));
       }
+
       $class_names = array($base_model_name, $associated_model_name);
 
       sort($class_names, SORT_STRING);
       $join_class_name = join("", $class_names);
     }
 
-    // Get table names for each class
+    // get table names for each class
     $base_table_name = self::_get_table_name($base_class_name);
     $associated_table_name = self::_get_table_name(self::$auto_prefix_models . $associated_class_name);
     $join_table_name = self::_get_table_name(self::$auto_prefix_models . $join_class_name);
 
-    // Get ID column names
+    // get ID column names
     $base_table_id_column = (is_null($key_in_base_table)) ?
         self::_get_id_column_name($base_class_name) :
         $key_in_base_table;
@@ -643,16 +654,9 @@ class Model
         self::_get_id_column_name(self::$auto_prefix_models . $associated_class_name) :
         $key_in_associated_table;
 
-    // Get the column names for each side of the join table
+    // get the column names for each side of the join table
     $key_to_base_table = self::_build_foreign_key_name($key_to_base_table, $base_table_name);
     $key_to_associated_table = self::_build_foreign_key_name($key_to_associated_table, $associated_table_name);
-
-    /*
-        "   SELECT {$associated_table_name}.*
-              FROM {$associated_table_name} JOIN {$join_table_name}
-                ON {$associated_table_name}.{$associated_table_id_column} = {$join_table_name}.{$key_to_associated_table}
-             WHERE {$join_table_name}.{$key_to_base_table} = {$this->$base_table_id_column} ;"
-    */
 
     return self::factory($associated_class_name, $connection_name)
                ->select("{$associated_table_name}.*")
@@ -663,6 +667,6 @@ class Model
                                        "{$join_table_name}.{$key_to_associated_table}",
                                    )
                )
-               ->where("{$join_table_name}.{$key_to_base_table}", $this->$base_table_id_column);;
+               ->where("{$join_table_name}.{$key_to_base_table}", $this->$base_table_id_column);
   }
 }

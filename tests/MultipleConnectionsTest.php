@@ -34,23 +34,29 @@ class MultipleConnectionsTest extends PHPUnit_Framework_TestCase
   {
     $simple = Model::factory('Simple')->find_one(1);
     $statement = ORM::get_last_statement();
-    $this->assertInstanceOf('MockPDOStatement', $statement);
+    self::assertInstanceOf('MockPDOStatement', $statement);
+    self::assertTrue($simple instanceof Simple);
+    self::assertTrue($simple instanceof Model);
 
     $simple = Model::factory('Simple', self::ALTERNATE); // Change the object's default connection
     $simple->find_one(1);
     $statement = ORM::get_last_statement();
-    $this->assertInstanceOf('MockDifferentPDOStatement', $statement);
+    self::assertInstanceOf('MockDifferentPDOStatement', $statement);
 
     $temp = Model::factory('Simple', self::ALTERNATE)->find_one(1);
     $statement = ORM::get_last_statement();
-    $this->assertInstanceOf('MockDifferentPDOStatement', $statement);
+    self::assertInstanceOf('MockDifferentPDOStatement', $statement);
+    self::assertTrue($temp instanceof Simple);
+    self::assertTrue($temp instanceof Model);
   }
 
   public function testCustomConnectionName()
   {
     $person3 = Model::factory('ModelWithCustomConnection')->find_one(1);
     $statement = ORM::get_last_statement();
-    $this->assertInstanceOf('MockDifferentPDOStatement', $statement);
+    self::assertInstanceOf('MockDifferentPDOStatement', $statement);
+    self::assertTrue($person3 instanceof ModelWithCustomConnection);
+    self::assertTrue($person3 instanceof Model);
   }
 
 }

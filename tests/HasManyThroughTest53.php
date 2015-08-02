@@ -2,6 +2,7 @@
 
 namespace {
 
+  /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
   class HasManyThroughTest extends PHPUnit_Framework_TestCase
   {
     private $sql = '
@@ -53,10 +54,12 @@ namespace {
 
     public function testHasManyThrough()
     {
+      /* @var $video \PHPProject\Models\Post */
       $video = \PHPProject\Models\Post::find_one(1);
+      /* @var $tags \PHPProject\Models\Tag[] */
       $tags = $video->tags()->find_many();
-      $this->assertArrayHasKey('id', $tags[0]->as_array());
-      $this->assertArrayHasKey('name', $tags[0]->as_array());
+      self::assertArrayHasKey('id', $tags[0]->as_array());
+      self::assertArrayHasKey('name', $tags[0]->as_array());
     }
   }
 }
@@ -67,27 +70,38 @@ namespace {
 
 namespace PHPProject\Models {
 
-  class Post extends \Model
+  use paris\orm\Model;
+
+  /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
+  class Post extends Model
   {
     public static $_table_use_short_name = true;
 
+    /**
+     * @return \paris\orm\ORMWrapper
+     */
     public function tags()
     {
       return $this->has_many_through('\\PHPProject\\Models\\Tag');
     }
   }
 
-  class Tag extends \Model
+  /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
+  class Tag extends Model
   {
     public static $_table_use_short_name = true;
 
+    /**
+     * @return \paris\orm\ORMWrapper
+     */
     public function posts()
     {
       return $this->has_many_through('\\PHPProject\\Models\\Post');
     }
   }
 
-  class PostTag extends \Model
+  /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
+  class PostTag extends Model
   {
     public static $_table_use_short_name = true;
   }

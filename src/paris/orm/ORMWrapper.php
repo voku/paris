@@ -51,9 +51,9 @@ namespace paris\orm;
  *
  * @see     http://www.php-fig.org/psr/psr-1/
  *
- * @method void setClassName()
- * @method static ORMWrapper forTable()
- * @method Model findOne()
+ * @method void setClassName($class_name)
+ * @method static ORMWrapper forTable($table_name, $connection_name=null)
+ * @method Model findOne($id=null)
  * @method Array findMany()
  *
  * @package paris\orm
@@ -133,8 +133,8 @@ class ORMWrapper extends \ORM
   public function find_many()
   {
     $results = parent::find_many();
-    foreach ($results as $key => $result) {
-      $results[$key] = $this->_create_model_instance($result);
+    foreach ($results as &$result) {
+      $results = $this->_create_model_instance($result);
     }
 
     return $results;

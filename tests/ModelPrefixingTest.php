@@ -29,19 +29,19 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
 
   public function testStaticPropertyExists()
   {
-    $this->assertClassHasStaticAttribute('auto_prefix_models', 'paris\orm\Model');
-    $this->assertInternalType('null', Model::$auto_prefix_models);
+    self::assertClassHasStaticAttribute('auto_prefix_models', 'paris\orm\Model');
+    self::assertInternalType('null', Model::$auto_prefix_models);
   }
 
-  public function testSettingAndUnsettingStaticPropertyValue()
+  public function testSettingAndUnSettingStaticPropertyValue()
   {
     $model_prefix = 'My_Model_Prefix_';
-    $this->assertInternalType('null', Model::$auto_prefix_models);
+    self::assertInternalType('null', Model::$auto_prefix_models);
     Model::$auto_prefix_models = $model_prefix;
-    $this->assertInternalType('string', Model::$auto_prefix_models);
-    $this->assertEquals($model_prefix, Model::$auto_prefix_models);
+    self::assertInternalType('string', Model::$auto_prefix_models);
+    self::assertEquals($model_prefix, Model::$auto_prefix_models);
     Model::$auto_prefix_models = null;
-    $this->assertInternalType('null', Model::$auto_prefix_models);
+    self::assertInternalType('null', Model::$auto_prefix_models);
   }
 
   public function testNoPrefixOnAutoTableName()
@@ -49,7 +49,7 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
     Model::$auto_prefix_models = null;
     Model::factory('Simple')->find_many();
     $expected = 'SELECT * FROM `simple`';
-    $this->assertEquals($expected, ORM::get_last_query());
+    self::assertEquals($expected, ORM::get_last_query());
   }
 
   public function testPrefixOnAutoTableName()
@@ -57,7 +57,7 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
     Model::$auto_prefix_models = 'MockPrefix_';
     Model::factory('Simple')->find_many();
     $expected = 'SELECT * FROM `mock_prefix_simple`';
-    $this->assertEquals($expected, ORM::get_last_query());
+    self::assertEquals($expected, ORM::get_last_query());
   }
 
   public function testPrefixOnAutoTableNameWithTableSpecified()
@@ -65,7 +65,7 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
     Model::$auto_prefix_models = 'MockPrefix_';
     Model::factory('TableSpecified')->find_many();
     $expected = 'SELECT * FROM `simple`';
-    $this->assertEquals($expected, ORM::get_last_query());
+    self::assertEquals($expected, ORM::get_last_query());
   }
 
 }

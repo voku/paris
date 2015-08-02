@@ -32,7 +32,7 @@ class MagicMethodsTest extends PHPUnit_Framework_TestCase
     $model = Model::factory("Simple")->create();
     $model->property = "test";
     unset($model->property);
-    $this->assertFalse(isset($model->property));
-    $this->assertTrue($model->get("property") != "test");
+    self::assertFalse(isset($model->property));
+    self::assertTrue($model->get("property") != "test");
   }
 }
