@@ -74,6 +74,12 @@ foreach ($tweets as $tweet) {
 Changelog
 ---------
 
+#### 1.5.5
+
+* Refactoring "_get_static_property()" -> so we can use dynamic variables via Models (__constructor) [[voku](https://github.com/voku/paris/commit/37ed7dd6003ba2ad5644607c934b8bc8a0311c86)]
+* Added missing '@' for a @return tag for create() method [[stellis](https://github.com/stellis)]
+* Adds global configuration option Model::$short_table_names [[michaelward82](https://github.com/michaelward82/paris/commit/e505f269f281fce3cd8a345812725a0af599bb65)]  
+
 #### 1.5.4 - released 2014-09-23
 
 * Corrects return value in docblock for 2 Model functions [[michaelward82](https://github.com/michaelward82)] - [issue #99](https://github.com/j4mie/paris/pull/99)
