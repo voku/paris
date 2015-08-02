@@ -1,7 +1,11 @@
 Changelog
 ---------
 
-#### 1.6.0
+#### 1.6.1
+
+* Added new composer-fork [[voku](https://github.com/voku/paris/commit/1a7f4889f54b0f3dc7ffefdac8df2454db685ab1)]
+
+#### 1.6.0 - released 2015-08-03
 
 * Added namespace "paris\orm"
 * Added missing __unset syntax [[qyanu](https://github.com/qyanu/parisorm/commit/7e234cc817b42ee10fd8d2419345ba4ea40b6768)]
