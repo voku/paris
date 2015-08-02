@@ -3,6 +3,8 @@
 docs/_build
 nbproject/
 
+.idea
+
 # composer
 vendor
 composer.lock

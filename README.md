@@ -74,8 +74,9 @@ foreach ($tweets as $tweet) {
 Changelog
 ---------
 
-#### 1.5.5
+#### 1.6.0
 
+* Added namespace "paris\orm"
 * Added missing __unset syntax [[qyanu](https://github.com/qyanu/parisorm/commit/7e234cc817b42ee10fd8d2419345ba4ea40b6768)]
 * Added @method tags for magic methods [[stellis](https://github.com/stellis)]
 * Refactoring "_get_static_property()" -> so we can use dynamic variables via Models (__constructor) [[voku](https://github.com/voku/paris/commit/37ed7dd6003ba2ad5644607c934b8bc8a0311c86)]
