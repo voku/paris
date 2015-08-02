@@ -49,6 +49,10 @@
      * directly. It is used internally by the Model base
      * class.
      *
+     * The methods documented below are magic methods that conform to PSR-1.
+     * This documentation exposes these methods to doc generators and IDEs.
+     * @see http://www.php-fig.org/psr/psr-1/
+     *
      * @method void setClassName($class_name)
      * @method static \ORMWrapper forTable($table_name, $connection_name = parent::DEFAULT_CONNECTION)
      * @method \Model findOne($id=null)
@@ -174,6 +178,10 @@
      * this class. A minimal subclass would look like:
      *
      * class Widget extends Model { }
+     *
+     * The methods documented below are magic methods that conform to PSR-1.
+     * This documentation exposes these methods to doc generators and IDEs.
+     * @see http://www.php-fig.org/psr/psr-1/
      *
      * @method void setOrm($orm)
      * @method $this setExpr($property, $value = null)
@@ -559,6 +567,16 @@
          */
         public function __isset($property) {
             return $this->orm->__isset($property);
+        }
+
+        /**
+         * Magic unset method, allows unset($model->property)
+         *
+         * @param  string $property
+         * @return void
+         */
+        public function __unset($property) {
+            $this->orm->__unset($property);
         }
 
         /**
