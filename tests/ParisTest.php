@@ -1,5 +1,8 @@
 <?php
 
+use paris\orm\Model;
+use paris\orm\ParisMethodMissingException;
+
 /**
  * Class ParisTest
  */
@@ -230,7 +233,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @expectedException ParisMethodMissingException
+   * @expectedException paris\orm\ParisMethodMissingException
    */
   public function testInvalidModelFunctionCallDoesNotRecurse()
   {

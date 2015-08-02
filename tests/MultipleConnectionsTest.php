@@ -1,11 +1,12 @@
 <?php
 
+use paris\orm\Model;
+
 /**
  * Class MultipleConnectionsTest
  */
 class MultipleConnectionsTest extends PHPUnit_Framework_TestCase
 {
-
   const ALTERNATE = 'alternate';
 
   public function setUp()

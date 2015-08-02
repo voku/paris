@@ -1,5 +1,7 @@
 <?php
 
+use paris\orm\Model;
+
 /**
  * Models for use during testing
  */

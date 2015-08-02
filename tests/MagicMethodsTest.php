@@ -1,6 +1,10 @@
 <?php
 
+use paris\orm\Model;
 
+/**
+ * Class MagicMethodsTest
+ */
 class MagicMethodsTest extends PHPUnit_Framework_TestCase
 {
 

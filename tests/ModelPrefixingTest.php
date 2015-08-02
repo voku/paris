@@ -1,5 +1,7 @@
 <?php
 
+use paris\orm\Model;
+
 /**
  * Class ModelPrefixingTest
  */
@@ -27,7 +29,7 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
 
   public function testStaticPropertyExists()
   {
-    $this->assertClassHasStaticAttribute('auto_prefix_models', 'Model');
+    $this->assertClassHasStaticAttribute('auto_prefix_models', 'paris\orm\Model');
     $this->assertInternalType('null', Model::$auto_prefix_models);
   }
 
