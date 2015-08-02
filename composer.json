@@ -1,5 +1,5 @@
 {
-  "name": "j4mie/paris",
+  "name": "voku/paris",
   "type": "library",
   "description": "A lightweight Active Record implementation for PHP5, built on top of Idiorm",
   "keywords": [
