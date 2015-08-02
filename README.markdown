@@ -80,7 +80,8 @@ Changelog
 * Added @method tags for magic methods [[stellis](https://github.com/stellis)]
 * Refactoring "_get_static_property()" -> so we can use dynamic variables via Models (__constructor) [[voku](https://github.com/voku/paris/commit/37ed7dd6003ba2ad5644607c934b8bc8a0311c86)]
 * Added missing '@' for a @return tag for create() method [[stellis](https://github.com/stellis)]
-* Adds global configuration option Model::$short_table_names [[michaelward82](https://github.com/michaelward82/paris/commit/e505f269f281fce3cd8a345812725a0af599bb65)]  
+* Added global configuration option Model::$short_table_names [[michaelward82](https://github.com/michaelward82/paris/commit/e505f269f281fce3cd8a345812725a0af599bb65)]
+* Fixed issue with the has_many_through method [[Ralphunter](https://github.com/Ralphunter/paris/commit/205dd62f8e5b20d6d4c867514285c90f026f9c6b)]
 
 #### 1.5.4 - released 2014-09-23
 
