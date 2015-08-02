@@ -91,7 +91,7 @@ class Psr1Test53 extends PHPUnit_Framework_TestCase
     $expected = "SELECT * FROM `user2` WHERE `id` = '' LIMIT 1";
     self::assertEquals($expected, ORM::getLastQuery());
     self::assertTrue($profile2 instanceof Profile2);
-    self::assertTrue($profile2 instanceof Profile2);
+    self::assertTrue($user3 instanceof User);
   }
 
   public function testBelongsToRelationWithCustomForeignKeyName()
@@ -102,6 +102,7 @@ class Psr1Test53 extends PHPUnit_Framework_TestCase
     $user4 = $profile2->user()->findOne();
     $expected = "SELECT * FROM `user2` WHERE `id` = '5' LIMIT 1";
     self::assertEquals($expected, ORM::getLastQuery());
+    self::assertTrue($user4 instanceof User2);
   }
 
   public function testHasManyRelation()
