@@ -49,15 +49,15 @@ namespace paris\orm;
  * @see     http://www.php-fig.org/psr/psr-1/
  *
  * @method void setOrm($orm)
- * @method $this setExpr($property, $value=null)
+ * @method $this setExpr($property, $value = null)
  * @method bool isDirty($property)
  * @method bool isNew()
  * @method Array asArray()
- * @method static ORMWrapper belongsTo($string, $custom_fk=null)
- * @method static ORMWrapper hasOne($string, $custom_fk=null)
- * @method static ORMWrapper hasMany($string, $custom_fk=null)
- * @method static ORMWrapper hasManyThrough($string_1, $custom_1_fk=null, $string_2=null, $custom_2_fk=null)
- * @method static ORMWrapper find_one($id=null)
+ * @method static ORMWrapper belongsTo($string, $custom_fk = null)
+ * @method static ORMWrapper hasOne($string, $custom_fk = null)
+ * @method static ORMWrapper hasMany($string, $custom_fk = null)
+ * @method static ORMWrapper hasManyThrough($string_1, $custom_1_fk = null, $string_2 = null, $custom_2_fk = null)
+ * @method static ORMWrapper find_one($id = null)
  * @method static ORMWrapper find_many()
  *
  * @package paris\orm

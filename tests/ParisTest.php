@@ -213,7 +213,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
 
   public function testHasManyThroughRelationWithCustomIntermediateModelAndKeyNames()
   {
-    /* @var $book2 Book Two*/
+    /* @var $book2 Book Two */
     $book2 = Model::factory('BookTwo')->find_one(1);
     $book2->authors()->find_many();
     $expected = "SELECT `author`.* FROM `author` JOIN `author_book` ON `author`.`id` = `author_book`.`custom_author_id` WHERE `author_book`.`custom_book_id` = '1'";

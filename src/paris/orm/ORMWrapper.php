@@ -52,8 +52,8 @@ namespace paris\orm;
  * @see     http://www.php-fig.org/psr/psr-1/
  *
  * @method void setClassName($class_name)
- * @method static ORMWrapper forTable($table_name, $connection_name=null)
- * @method Model findOne($id=null)
+ * @method static ORMWrapper forTable($table_name, $connection_name = null)
+ * @method Model findOne($id = null)
  * @method Array findMany()
  *
  * @package paris\orm

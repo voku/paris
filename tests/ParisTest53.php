@@ -2,7 +2,10 @@
 
 namespace Paris\Tests;
 
-use ORM, paris\orm\Model, MockPDO, PHPUnit_Framework_TestCase;
+use MockPDO;
+use ORM;
+use paris\orm\Model;
+use PHPUnit_Framework_TestCase;
 
 /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
 class ParisTest53 extends PHPUnit_Framework_TestCase
