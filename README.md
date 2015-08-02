@@ -1,9 +1,19 @@
-Paris
-=====
-
 [![Build Status](https://travis-ci.org/voku/paris.png?branch=master)](https://travis-ci.org/voku/paris)
 
+# Paris
+
 [http://j4mie.github.com/idiormandparis/](http://j4mie.github.com/idiormandparis/)
+
+WARNING: this is only a Maintained-Fork of "https://github.com/j4mie/paris/"
+
+---
+## Installation
+
+The recommended installation way is through [Composer](https://getcomposer.org).
+
+```bash
+$ composer require voku/paris
+```
 
 ---
 ### Feature complete
