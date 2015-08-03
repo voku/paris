@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/voku/paris.png?branch=master)](https://travis-ci.org/voku/paris)
 [![codecov.io](http://codecov.io/github/voku/paris/coverage.svg?branch=master)](http://codecov.io/github/voku/paris?branch=master)
+[![Codacy Badge](https://www.codacy.com/project/badge/e46cf50ac9e142668e0d6b47a8ed7cdb)](https://www.codacy.com/app/voku/paris)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/92e21e1f-d31e-4449-92bf-f895ff87f7d2/mini.png)](https://insight.sensiolabs.com/projects/92e21e1f-d31e-4449-92bf-f895ff87f7d2)
 [![Total Downloads](https://poser.pugx.org/voku/paris/downloads)](https://packagist.org/packages/voku/paris)
 [![License](https://poser.pugx.org/voku/paris/license.svg)](https://packagist.org/packages/voku/paris)
