@@ -143,7 +143,7 @@ class Model
     $class_name = self::$auto_prefix_models . $class_name;
     $table_name = self::_get_table_name($class_name);
 
-    if ($connection_name == null) {
+    if (!$connection_name) {
       $connection_name = self::_get_class_property(
           $class_name,
           '_connection_name',
