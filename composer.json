@@ -52,7 +52,7 @@
   },
   "autoload": {
     "psr-4": {
-      "paris\\orm\\": "src"
+      "paris\\orm\\": "src/paris/orm/"
     }
   }
 }
