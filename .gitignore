@@ -2,6 +2,7 @@
 *.sqlite
 docs/_build
 nbproject/
+build/
 
 .idea
 
