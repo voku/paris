@@ -29,10 +29,10 @@ class MagicMethodsTest extends PHPUnit_Framework_TestCase
 
   public function testMagicMethodUnset()
   {
-    $model = Model::factory("Simple")->create();
-    $model->property = "test";
+    $model = Model::factory('Simple')->create();
+    $model->property = 'test';
     unset($model->property);
     self::assertFalse(isset($model->property));
-    self::assertTrue($model->get("property") != "test");
+    self::assertTrue($model->get('property') != 'test');
   }
 }

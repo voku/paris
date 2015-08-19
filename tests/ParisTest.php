@@ -70,7 +70,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
   public function testInsertData()
   {
     $widget = Model::factory('Simple')->create();
-    $widget->name = "Fred";
+    $widget->name = 'Fred';
     $widget->age = 10;
     $widget->save();
     $expected = "INSERT INTO `simple` (`name`, `age`) VALUES ('Fred', '10')";
@@ -80,7 +80,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
   public function testUpdateData()
   {
     $widget = Model::factory('Simple')->find_one(1);
-    $widget->name = "Fred";
+    $widget->name = 'Fred';
     $widget->age = 10;
     $widget->save();
     $expected = "UPDATE `simple` SET `name` = 'Fred', `age` = '10' WHERE `id` = '1'";
@@ -98,7 +98,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
   public function testInsertingDataContainingAnExpression()
   {
     $widget = Model::factory('Simple')->create();
-    $widget->name = "Fred";
+    $widget->name = 'Fred';
     $widget->age = 10;
     $widget->set_expr('added', 'NOW()');
     $widget->save();
