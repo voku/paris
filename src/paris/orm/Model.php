@@ -638,7 +638,7 @@ class Model
       $class_names = array($base_model_name, $associated_model_name);
 
       sort($class_names, SORT_STRING);
-      $join_class_name = join("", $class_names);
+      $join_class_name = join('', $class_names);
     }
 
     // get table names for each class
