@@ -179,7 +179,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $expected = "SELECT * FROM `post` WHERE `user_three_id` = '1'";
     self::assertEquals($expected, ORM::get_last_query());
     self::assertTrue($user3 instanceof UserThree);
-    self::assertTrue($posts instanceof Post);
+    self::assertTrue(is_array($posts));
   }
 
   public function testHasManyRelationWithCustomForeignKeyName()
@@ -189,7 +189,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $posts = $user4->posts()->find_many();
     $expected = "SELECT * FROM `post` WHERE `my_custom_fk_column` = '1'";
     self::assertEquals($expected, ORM::get_last_query());
-    self::assertTrue($posts instanceof Post);
+    self::assertTrue(is_array($posts));
   }
 
   public function testHasManyRelationWithCustomForeignKeyNameInBaseAndAssociatedTables()
@@ -199,7 +199,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $posts = $user6->posts()->find_many();
     $expected = "SELECT * FROM `post` WHERE `my_custom_fk_column` = 'Fred'";
     self::assertEquals($expected, ORM::get_last_query());
-    self::assertTrue($posts instanceof Post);
+    self::assertTrue(is_array($posts));
   }
 
   public function testHasManyThroughRelation()
