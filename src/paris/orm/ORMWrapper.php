@@ -111,11 +111,12 @@ class ORMWrapper extends \ORM
    *
    * @return bool|Model
    */
-  protected function _create_model_instance($orm)
+  protected function _create_model_instance(&$orm)
   {
     if ($orm === false) {
       return false;
     }
+
     /* @var $model Model */
     $model = new $this->_class_name();
     $model->set_orm($orm);
@@ -128,13 +129,14 @@ class ORMWrapper extends \ORM
    * an array of instances of the class associated
    * with this wrapper instead of the raw ORM class.
    *
-   * @return Array
+   * @return array
    */
   public function find_many()
   {
     $results = parent::find_many();
-    foreach ($results as $index => &$result) {
-      $results[$index] = $this->_create_model_instance($result);
+
+    foreach ($results as &$result) {
+      $result = $this->_create_model_instance($result);
     }
 
     return $results;

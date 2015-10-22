@@ -52,7 +52,7 @@ namespace paris\orm;
  * @method $this setExpr($property, $value = null)
  * @method bool isDirty($property)
  * @method bool isNew()
- * @method Array asArray()
+ * @method array asArray()
  * @method static ORMWrapper belongsTo($string, $custom_fk = null)
  * @method static ORMWrapper hasOne($string, $custom_fk = null)
  * @method static ORMWrapper hasMany($string, $custom_fk = null)
@@ -128,9 +128,9 @@ class Model
    * Calls static methods directly on the ORMWrapper
    *
    * @param  string $method
-   * @param  Array  $parameters
+   * @param  array  $parameters
    *
-   * @return Array|false
+   * @return array|false
    */
   public static function __callStatic($method, $parameters)
   {
@@ -203,7 +203,7 @@ class Model
       $class_name = end($exploded_class_name);
     }
 
-    if (is_null($specified_table_name)) {
+    if (null === $specified_table_name) {
       return self::$auto_prefix_tables . self::_class_name_to_table_name($class_name);
     }
 
@@ -251,7 +251,11 @@ class Model
     $global_option = self::$short_table_names;
     $class_property = self::_get_class_property($class_name, '_table_use_short_name');
 
-    return is_null($class_property) ? $global_option : $class_property;
+    if (null === $class_property) {
+      return $global_option;
+    } else {
+      return $class_property;
+    }
   }
 
   /**
@@ -300,8 +304,10 @@ class Model
    *
    * @return void
    */
-  public function set_orm($orm)
+  public function set_orm(&$orm)
   {
+    // INFO: this is only a "reference mismatch", if "$orm" isn't a object
+    /** @noinspection ReferenceMismatchInspection */
     $this->orm = $orm;
   }
 
@@ -421,7 +427,7 @@ class Model
   /**
    * Wrapper for Idiorm's as_array method.
    *
-   * @return Array
+   * @return array
    */
   public function as_array()
   {
@@ -456,7 +462,7 @@ class Model
    * corresponding database table. If any keys are supplied which
    * do not match up with columns, the database will throw an error.
    *
-   * @param  Array $data
+   * @param  array $data
    *
    * @return void
    */
@@ -527,7 +533,7 @@ class Model
     // looking for. Where foreign_table is the actual
     // database table in the associated model.
 
-    if (is_null($foreign_key_name_in_current_models_table)) {
+    if (null === $foreign_key_name_in_current_models_table) {
       // Match foreign_table.{$foreign_key_name} with the value of
       // {$this->_table}.{$this->id()}
       $where_value = $this->id();
@@ -553,7 +559,7 @@ class Model
    */
   protected static function _build_foreign_key_name($specified_foreign_key_name, $table_name)
   {
-    if (!is_null($specified_foreign_key_name)) {
+    if (null !== $specified_foreign_key_name) {
       return $specified_foreign_key_name;
     }
 
@@ -605,14 +611,15 @@ class Model
 
     $desired_record = null;
 
-    if (is_null($foreign_key_name_in_associated_models_table)) {
+    if (null === $foreign_key_name_in_associated_models_table) {
       // "{$associated_table_name}.primary_key = {$associated_object_id}"
       // NOTE: primary_key is a placeholder for the actual primary key column's name
       // in $associated_table_name
       $desired_record = self::factory($associated_class_name, $connection_name)->where_id_is($associated_object_id);
     } else {
       // "{$associated_table_name}.{$foreign_key_name_in_associated_models_table} = {$associated_object_id}"
-      $desired_record = self::factory($associated_class_name, $connection_name)->where($foreign_key_name_in_associated_models_table, $associated_object_id);
+      $desired_record = self::factory($associated_class_name, $connection_name)
+                            ->where($foreign_key_name_in_associated_models_table, $associated_object_id);
     }
 
     return $desired_record;
@@ -639,7 +646,7 @@ class Model
     // The class name of the join model, if not supplied, is
     // formed by concatenating the names of the base class
     // and the associated class, in alphabetical order.
-    if (is_null($join_class_name)) {
+    if (null === $join_class_name) {
       $base_model = explode('\\', $base_class_name);
 
       $base_model_name = end($base_model);
@@ -666,26 +673,44 @@ class Model
     $join_table_name = self::_get_table_name(self::$auto_prefix_models . $join_class_name);
 
     // get ID column names
-    $base_table_id_column = (is_null($key_in_base_table)) ?
-        self::_get_id_column_name($base_class_name) :
-        $key_in_base_table;
-    $associated_table_id_column = (is_null($key_in_associated_table)) ?
-        self::_get_id_column_name(self::$auto_prefix_models . $associated_class_name) :
-        $key_in_associated_table;
+    if (null === $key_in_base_table) {
+      $base_table_id_column = self::_get_id_column_name($base_class_name);
+    } else {
+      $base_table_id_column = $key_in_base_table;
+    }
+
+    if (null === $key_in_associated_table) {
+      $associated_table_id_column = self::_get_id_column_name(
+          self::$auto_prefix_models . $associated_class_name
+      );
+    } else {
+      $associated_table_id_column = $key_in_associated_table;
+    }
 
     // get the column names for each side of the join table
-    $key_to_base_table = self::_build_foreign_key_name($key_to_base_table, $base_table_name);
-    $key_to_associated_table = self::_build_foreign_key_name($key_to_associated_table, $associated_table_name);
+    $key_to_base_table = self::_build_foreign_key_name(
+        $key_to_base_table,
+        $base_table_name
+    );
+
+    $key_to_associated_table = self::_build_foreign_key_name(
+        $key_to_associated_table,
+        $associated_table_name
+    );
 
     return self::factory($associated_class_name, $connection_name)
                ->select("{$associated_table_name}.*")
                ->join(
-                   $join_table_name, array(
-                                       "{$associated_table_name}.{$associated_table_id_column}",
-                                       '=',
-                                       "{$join_table_name}.{$key_to_associated_table}",
-                                   )
+                   $join_table_name,
+                   array(
+                       "{$associated_table_name}.{$associated_table_id_column}",
+                       '=',
+                       "{$join_table_name}.{$key_to_associated_table}",
+                   )
                )
-               ->where("{$join_table_name}.{$key_to_base_table}", $this->$base_table_id_column);
+               ->where(
+                   "{$join_table_name}.{$key_to_base_table}",
+                   $this->$base_table_id_column
+               );
   }
 }
