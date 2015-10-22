@@ -304,7 +304,7 @@ class Model
    *
    * @return void
    */
-  public function set_orm(&$orm)
+  public function set_orm($orm)
   {
     // INFO: this is only a "reference mismatch", if "$orm" isn't a object
     /** @noinspection ReferenceMismatchInspection */

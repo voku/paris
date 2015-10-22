@@ -111,7 +111,7 @@ class ORMWrapper extends \ORM
    *
    * @return bool|Model
    */
-  protected function _create_model_instance(&$orm)
+  protected function _create_model_instance($orm)
   {
     if ($orm === false) {
       return false;
