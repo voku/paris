@@ -234,8 +234,14 @@ class ParisTest extends PHPUnit_Framework_TestCase
   {
     /* @var $book4 BookFour */
     $book4 = Model::factory('BookFour')->find_one(1);
-    $book4->authors()->find_many();
+
+    /* @var $authors \Tests3\Author[] */
+    $authors = $book4->authors()->find_many();
+
+    self::assertEquals('Fred', $authors[0]->get('name'));
+
     $expected = "SELECT `author`.* FROM `author` JOIN `author_book` ON `author`.`custom_author_id_in_author_table` = `author_book`.`custom_author_id` WHERE `author_book`.`custom_book_id` = '1'";
+
     self::assertEquals($expected, ORM::get_last_query());
   }
 
@@ -244,8 +250,14 @@ class ParisTest extends PHPUnit_Framework_TestCase
     /* @var $book5 BookFive */
     $book5 = Model::factory('BookFive')->find_one(1);
     $book5->custom_book_id_in_book_table = 49;
-    $book5->authors()->find_many();
+
+    /* @var $authors \Tests3\Author[] */
+    $authors = $book5->authors()->find_many();
+
+    self::assertEquals('Fred', $authors[0]->get('name'));
+
     $expected = "SELECT `author`.* FROM `author` JOIN `author_book` ON `author`.`id` = `author_book`.`custom_author_id` WHERE `author_book`.`custom_book_id` = '49'";
+
     self::assertEquals($expected, ORM::get_last_query());
   }
 
