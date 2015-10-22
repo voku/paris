@@ -56,8 +56,11 @@ namespace {
     {
       /* @var $video \PHPProject\Models\Post */
       $video = \PHPProject\Models\Post::find_one(1);
+
       /* @var $tags \PHPProject\Models\Tag[] */
       $tags = $video->tags()->find_many();
+
+      self::assertEquals('foobar', $tags[0]::foobar());
       self::assertArrayHasKey('id', $tags[0]->as_array());
       self::assertArrayHasKey('name', $tags[0]->as_array());
     }
@@ -90,6 +93,14 @@ namespace PHPProject\Models {
   class Tag extends Model
   {
     public static $_table_use_short_name = true;
+
+    /**
+     * @return string
+     */
+    public static function foobar()
+    {
+      return 'foobar';
+    }
 
     /**
      * @return \paris\orm\ORMWrapper
