@@ -1,6 +1,5 @@
 <?php
 
-use idiorm\orm\IdiormMethodMissingException;
 use idiorm\orm\ORM;
 use paris\orm\Model;
 
