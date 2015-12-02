@@ -2,8 +2,8 @@
 
 namespace Paris\Tests;
 
+use idiorm\orm\ORM;
 use MockPDO;
-use ORM;
 use paris\orm\Model;
 use PHPUnit_Framework_TestCase;
 

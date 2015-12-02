@@ -2,6 +2,8 @@
 
 namespace paris\orm;
 
+use idiorm\orm\ORM;
+
 /**
  *
  * Paris | http://github.com/j4mie/paris/
@@ -58,7 +60,7 @@ namespace paris\orm;
  *
  * @package paris\orm
  */
-class ORMWrapper extends \ORM
+class ORMWrapper extends ORM
 {
 
   /**
@@ -107,7 +109,7 @@ class ORMWrapper extends \ORM
    * associated with this wrapper and populate
    * it with the supplied Idiorm instance.
    *
-   * @param \ORM $orm
+   * @param ORM $orm
    *
    * @return bool|Model
    */

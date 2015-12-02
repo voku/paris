@@ -36,6 +36,7 @@ namespace paris\orm;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+use idiorm\orm\ORM;
 
 /**
  * Model base class. Your model objects should extend
@@ -120,7 +121,7 @@ class Model
    * The ORM instance used by this model
    * instance to communicate with the database.
    *
-   * @var \ORM $orm
+   * @var ORM $orm
    */
   public $orm;
 
@@ -300,7 +301,7 @@ class Model
   /**
    * Set the wrapped ORM instance associated with this Model instance.
    *
-   * @param \ORM $orm
+   * @param ORM $orm
    *
    * @return void
    */

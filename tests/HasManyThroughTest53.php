@@ -2,6 +2,8 @@
 
 namespace {
 
+  use idiorm\orm\ORM;
+
   /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
   class HasManyThroughTest extends PHPUnit_Framework_TestCase
   {

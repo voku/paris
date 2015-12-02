@@ -1,5 +1,6 @@
 <?php
 
+use idiorm\orm\ORM;
 use paris\orm\Model;
 
 /**

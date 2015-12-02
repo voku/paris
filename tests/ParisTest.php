@@ -1,5 +1,7 @@
 <?php
 
+use idiorm\orm\IdiormMethodMissingException;
+use idiorm\orm\ORM;
 use paris\orm\Model;
 
 /**
@@ -264,7 +266,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
   public function testFindResultSet()
   {
     $result_set = Model::factory('BookFive')->find_result_set();
-    self::assertInstanceOf('IdiormResultSet', $result_set);
+    self::assertInstanceOf('idiorm\orm\IdiormResultSet', $result_set);
     self::assertSame(count($result_set), 5);
   }
 
@@ -279,7 +281,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * @expectedException IdiormMethodMissingException
+   * @expectedException idiorm\orm\IdiormMethodMissingException
    */
   public function testInvalidORMWrapperFunctionCallDoesNotRecurse()
   {
