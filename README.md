@@ -19,20 +19,11 @@ The recommended installation way is through [Composer](https://getcomposer.org).
 $ composer require voku/paris
 ```
 
----
-### Feature complete
-
-Paris is now considered to be feature complete as of version 1.5.0. Whilst it will continue to be maintained with bug fixes there will be no further new features added from this point on.
-
-**Please do not submit feature requests or pull requests adding new features as they will be closed without ceremony.**
-
----
-
 A lightweight Active Record implementation for PHP5.
 
 Built on top of [Idiorm](http://github.com/j4mie/idiorm/).
 
-Tested on PHP 5.2.0+ - may work on earlier versions with PDO and the correct database drivers.
+Tested on PHP 5.3+ - may work on earlier versions with PDO and the correct database drivers.
 
 Released under a [BSD license](http://en.wikipedia.org/wiki/BSD_licenses).
 
@@ -65,22 +56,34 @@ The documentation will now be in docs/_build/html/index.html
 Let's See Some Code
 -------------------
 ```php
+/**
+ * User: a sample user-class
+ *
+ * @property int    $id
+ * @property string $first_name
+ */
 class User extends Model {
-    public function tweets() {
-        return $this->has_many('Tweet');
-    }
+  public function tweets() {
+      return $this->has_many('Tweet');
+  }
 }
 
+/**
+ * Tweet: a sample twitter-class
+ *
+ * @property int    $id
+ * @property string $text
+ */
 class Tweet extends Model {}
 
 $user = Model::factory('User')
-    ->where_equal('username', 'j4mie')
+  ->where_equal('username', 'j4mie')
     ->find_one();
 $user->first_name = 'Jamie';
 $user->save();
 
 $tweets = $user->tweets()->find_many();
 foreach ($tweets as $tweet) {
-    echo $tweet->text;
+  echo $tweet->text;
 }
 ```
