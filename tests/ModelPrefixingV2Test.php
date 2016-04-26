@@ -2,8 +2,8 @@
 
 namespace Paris\Tests {
 
+  use idiorm\orm\ORM;
   use MockPDO;
-  use ORM;
   use paris\orm\Model;
   use PHPUnit_Framework_TestCase;
 
@@ -75,7 +75,7 @@ namespace Paris\Tests {
       $authors = $book->authors()->find_many();
       $expected = "SELECT `prefix_author`.* FROM `prefix_author` JOIN `prefix_authorbook` ON `prefix_author`.`id` = `prefix_authorbook`.`prefix_author_id` WHERE `prefix_authorbook`.`prefix_book_id` = '1'";
       self::assertEquals($expected, ORM::get_last_query());
-      self::assertEquals(true, $authors instanceof Model);
+      self::assertEquals(true, $authors[0] instanceof Model);
     }
 
     public function testPrefixOnHasManyThroughRelationWithCustomIntermediateModelAndKeyNames()
@@ -86,7 +86,7 @@ namespace Paris\Tests {
       $authors2 = $book2->authors()->find_many();
       $expected = "SELECT `prefix_author`.* FROM `prefix_author` JOIN `prefix_authorbook` ON `prefix_author`.`id` = `prefix_authorbook`.`custom_author_id` WHERE `prefix_authorbook`.`custom_book_id` = '1'";
       self::assertEquals($expected, ORM::get_last_query());
-      self::assertEquals(true, $authors2 instanceof Model);
+      self::assertEquals(true, $authors2[0] instanceof Model);
     }
   }
 }
