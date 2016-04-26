@@ -121,6 +121,8 @@ class ORMWrapper extends ORM
 
     /* @var $model Model */
     $model = new $this->_class_name();
+    /** @noinspection PhpUndefinedMethodInspection */
+    $orm->set_class_name($this->_class_name);
     $model->set_orm($orm);
 
     return $model;
