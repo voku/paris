@@ -32,17 +32,21 @@ class ParisTest53 extends PHPUnit_Framework_TestCase
     Model::factory('Paris\Tests\Simple')->find_many();
     $expected = 'SELECT * FROM `paris_tests_simple`';
     self::assertEquals($expected, ORM::get_last_query());
+
     MustNotIgnoreNamespace::find_many();
     $expected = 'SELECT * FROM `paris_tests_must_not_ignore_namespace`';
     self::assertEquals($expected, ORM::get_last_query());
+
     Model::$short_table_names = true;
     MustNotIgnoreNamespace::find_many();
     $expected = 'SELECT * FROM `paris_tests_must_not_ignore_namespace`';
     self::assertEquals($expected, ORM::get_last_query());
+
     Model::$short_table_names = false;
     MustUseGlobalNamespaceConfig::find_many();
     $expected = 'SELECT * FROM `paris_tests_must_use_global_namespace_config`';
     self::assertEquals($expected, ORM::get_last_query());
+
     Model::$short_table_names = false;
     MustNotIgnoreNamespace::find_many();
     $expected = 'SELECT * FROM `paris_tests_must_not_ignore_namespace`';
@@ -54,14 +58,17 @@ class ParisTest53 extends PHPUnit_Framework_TestCase
     MustIgnoreNamespace::find_many();
     $expected = 'SELECT * FROM `must_ignore_namespace`';
     self::assertEquals($expected, ORM::get_last_query());
+
     Model::$short_table_names = true;
     MustIgnoreNamespace::find_many();
     $expected = 'SELECT * FROM `must_ignore_namespace`';
     self::assertEquals($expected, ORM::get_last_query());
+
     Model::$short_table_names = true;
     MustUseGlobalNamespaceConfig::find_many();
     $expected = 'SELECT * FROM `must_use_global_namespace_config`';
     self::assertEquals($expected, ORM::get_last_query());
+
     Model::$short_table_names = false;
     MustIgnoreNamespace::find_many();
     $expected = 'SELECT * FROM `must_ignore_namespace`';

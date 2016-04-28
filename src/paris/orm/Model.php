@@ -440,7 +440,7 @@ class Model
   /**
    * Save the data associated with this model instance to the database.
    *
-   * @return null
+   * @return bool
    */
   public function save()
   {
@@ -450,7 +450,7 @@ class Model
   /**
    * Delete the database row associated with this model instance.
    *
-   * @return null
+   * @return bool
    */
   public function delete()
   {
