@@ -49,7 +49,7 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
     $orm->setEmail($array['fields']['E-Mail-Adresse']);
     $orm->setMarket($array['fields']['Markt']);
     $orm->setDate(date('Y-m-d', strtotime($array['fields']['Datum'])) . ' ' . $array['fields']['Uhrzeit'] . ':00');
-    $orm->setDateCreated(date('Y-m-d'));
+    $orm->setDateCreated('2016-04-28');
     $orm->setSum($array['fields']['Gesamtbetrag']);
 
     $orm->save();
