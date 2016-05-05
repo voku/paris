@@ -139,8 +139,8 @@ class ORMWrapper extends ORM
   {
     $results = parent::find_many();
 
-    foreach ($results as &$result) {
-      $result = $this->_create_model_instance($result);
+    foreach ($results as $counter => $result) {
+      $results[$counter] = $this->_create_model_instance($result);
     }
 
     return $results;
