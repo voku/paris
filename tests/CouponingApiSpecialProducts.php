@@ -3,7 +3,6 @@
 namespace Paris\Tests;
 
 use paris\orm\Model;
-use paris\orm\ORMWrapper;
 
 /**
  * CouponingApiSpecialProducts.php
@@ -90,7 +89,7 @@ class CouponingApiSpecialProducts extends Model
   }
 
   /**
-   * @return ORMWrapper
+   * @return \idiorm\orm\ORM
    */
   public function couponingApi()
   {

@@ -38,7 +38,7 @@ class MockPDOStatement extends PDOStatement
    */
   public function fetch($fetch_style = PDO::FETCH_BOTH, $cursor_orientation = PDO::FETCH_ORI_NEXT, $cursor_offset = 0)
   {
-    if ($this->current_row == 5) {
+    if ($this->current_row === 5) {
       return false;
     } else {
       return array('name' => 'Fred', 'age' => 10, 'id' => ++$this->current_row);

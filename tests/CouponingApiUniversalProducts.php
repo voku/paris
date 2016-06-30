@@ -3,7 +3,6 @@
 namespace Paris\Tests;
 
 use paris\orm\Model;
-use paris\orm\ORMWrapper;
 
 /**
  * CouponingApiUniversalProducts
@@ -90,7 +89,7 @@ class CouponingApiUniversalProducts extends Model
   }
 
   /**
-   * @return ORMWrapper
+   * @return \idiorm\orm\ORM
    */
   public function couponingApi()
   {

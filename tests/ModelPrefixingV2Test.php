@@ -143,7 +143,7 @@ namespace Tests3 {
     public static $_table = 'prefix_book';
 
     /**
-     * @return \paris\orm\ORMWrapper
+     * @return \idiorm\orm\ORM
      */
     public function authors()
     {
@@ -157,7 +157,7 @@ namespace Tests3 {
     public static $_table = 'prefix_booktwo';
 
     /**
-     * @return \paris\orm\ORMWrapper
+     * @return \idiorm\orm\ORM
      */
     public function authors()
     {

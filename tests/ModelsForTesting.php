@@ -36,7 +36,7 @@ class ModelWithFilters extends Model
   /**
    * @param ORM $orm
    *
-   * @return $this|ORM
+   * @return ORM
    */
   public static function name_is_fred(ORM $orm)
   {
@@ -47,7 +47,7 @@ class ModelWithFilters extends Model
    * @param ORM    $orm
    * @param string $name
    *
-   * @return $this|ORM
+   * @return ORM
    */
   public static function name_is(ORM $orm, $name)
   {
@@ -66,7 +66,7 @@ class ModelWithCustomConnection extends Model
 class Profile extends Model
 {
   /**
-   * @return null|Model
+   * @return ORM|null
    */
   public function user()
   {
@@ -78,7 +78,7 @@ class Profile extends Model
 class User extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function profile()
   {
@@ -90,7 +90,7 @@ class User extends Model
 class UserTwo extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function profile()
   {
@@ -102,7 +102,7 @@ class UserTwo extends Model
 class UserFive extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function profile()
   {
@@ -114,7 +114,7 @@ class UserFive extends Model
 class ProfileTwo extends Model
 {
   /**
-   * @return null|Model
+   * @return ORM|null
    */
   public function user()
   {
@@ -126,7 +126,7 @@ class ProfileTwo extends Model
 class ProfileThree extends Model
 {
   /**
-   * @return null|Model
+   * @return ORM|null
    */
   public function user()
   {
@@ -143,7 +143,7 @@ class Post extends Model
 class UserThree extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function posts()
   {
@@ -155,7 +155,7 @@ class UserThree extends Model
 class UserFour extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function posts()
   {
@@ -167,7 +167,7 @@ class UserFour extends Model
 class UserSix extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function posts()
   {
@@ -189,7 +189,7 @@ class AuthorBook extends Model
 class Book extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function authors()
   {
@@ -201,7 +201,7 @@ class Book extends Model
 class BookTwo extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function authors()
   {
@@ -213,7 +213,7 @@ class BookTwo extends Model
 class BookThree extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function authors()
   {
@@ -225,7 +225,7 @@ class BookThree extends Model
 class BookFour extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function authors()
   {
@@ -237,7 +237,7 @@ class BookFour extends Model
 class BookFive extends Model
 {
   /**
-   * @return \paris\orm\ORMWrapper
+   * @return ORM
    */
   public function authors()
   {

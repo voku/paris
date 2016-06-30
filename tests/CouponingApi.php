@@ -158,7 +158,7 @@ class CouponingApi extends Model
   }
 
   /**
-   * @return ORMWrapper
+   * @return \idiorm\orm\ORM
    */
   public function couponingApiSpecialProducts()
   {
@@ -166,7 +166,7 @@ class CouponingApi extends Model
   }
 
   /**
-   * @return ORMWrapper
+   * @return \idiorm\orm\ORM
    */
   public function couponingApiUniversalProducts()
   {

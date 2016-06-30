@@ -83,7 +83,7 @@ namespace PHPProject\Models {
     public static $_table_use_short_name = true;
 
     /**
-     * @return \paris\orm\ORMWrapper
+     * @return \idiorm\orm\ORM
      */
     public function tags()
     {
@@ -105,7 +105,7 @@ namespace PHPProject\Models {
     }
 
     /**
-     * @return \paris\orm\ORMWrapper
+     * @return \idiorm\orm\ORM
      */
     public function posts()
     {

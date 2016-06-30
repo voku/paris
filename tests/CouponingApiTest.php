@@ -74,11 +74,11 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
         $ormTmp->save();
 
         // test
-        if ($product == 'product1') {
+        if ($product === 'product1') {
           $lastQuery = ORM::get_last_query();
           $expected = 'INSERT INTO `tracking_couponing_universal_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'product1\', \'1\', \'666\')';
           self::assertEquals($expected, $lastQuery);
-        } elseif ($product == 'product2') {
+        } elseif ($product === 'product2') {
           $lastQuery = ORM::get_last_query();
           $expected = 'INSERT INTO `tracking_couponing_universal_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'product2\', \'4\', \'666\')';
           self::assertEquals($expected, $lastQuery);

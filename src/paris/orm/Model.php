@@ -506,7 +506,7 @@ class Model
    * @param  null|string $foreign_key_name_in_current_models_table
    * @param  null|string $connection_name
    *
-   * @return ORMWrapper
+   * @return ORM
    */
   protected function has_one($associated_class_name, $foreign_key_name = null, $foreign_key_name_in_current_models_table = null, $connection_name = null)
   {
@@ -524,7 +524,7 @@ class Model
    * @param  null|string $foreign_key_name_in_current_models_table
    * @param  null|string $connection_name
    *
-   * @return ORMWrapper
+   * @return ORM
    */
   protected function _has_one_or_many($associated_class_name, $foreign_key_name = null, $foreign_key_name_in_current_models_table = null, $connection_name = null)
   {
@@ -587,7 +587,7 @@ class Model
    * @param  null|string $foreign_key_name_in_current_models_table
    * @param  null|string $connection_name
    *
-   * @return ORMWrapper
+   * @return ORM
    */
   protected function has_many($associated_class_name, $foreign_key_name = null, $foreign_key_name_in_current_models_table = null, $connection_name = null)
   {
@@ -639,7 +639,7 @@ class Model
    * @param  null|string $key_in_associated_table
    * @param  null|string $connection_name
    *
-   * @return ORMWrapper
+   * @return ORM
    */
   protected function has_many_through($associated_class_name, $join_class_name = null, $key_to_base_table = null, $key_to_associated_table = null, $key_in_base_table = null, $key_in_associated_table = null, $connection_name = null)
   {
@@ -652,21 +652,21 @@ class Model
       $base_model = explode('\\', $base_class_name);
 
       $base_model_name = end($base_model);
-      if (substr($base_model_name, 0, strlen(self::$auto_prefix_models)) == self::$auto_prefix_models) {
+      if (0 === strpos($base_model_name, self::$auto_prefix_models)) {
         $base_model_name = substr($base_model_name, strlen(self::$auto_prefix_models), strlen($base_model_name));
       }
 
       // Paris wasn't checking the name settings for the associated class.
       $associated_model = explode('\\', $associated_class_name);
       $associated_model_name = end($associated_model);
-      if (substr($associated_model_name, 0, strlen(self::$auto_prefix_models)) == self::$auto_prefix_models) {
+      if (0 === strpos($associated_model_name, self::$auto_prefix_models)) {
         $associated_model_name = substr($associated_model_name, strlen(self::$auto_prefix_models), strlen($associated_model_name));
       }
 
       $class_names = array($base_model_name, $associated_model_name);
 
       sort($class_names, SORT_STRING);
-      $join_class_name = join('', $class_names);
+      $join_class_name = implode('', $class_names);
     }
 
     // get table names for each class
