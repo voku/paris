@@ -7,10 +7,10 @@ use paris\orm\Model;
 /**
  * CouponingApiSpecialProducts.php
  *
- * @property int    $id
- * @property int    $couponing_api_id_fk
- * @property string $product
- * @property int    $count
+ * @property-read int    $id
+ * @property-read int    $couponing_api_id_fk
+ * @property-read string $product
+ * @property-read int    $count
  */
 class CouponingApiSpecialProducts extends Model
 {

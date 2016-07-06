@@ -3,19 +3,18 @@
 namespace Paris\Tests;
 
 use paris\orm\Model;
-use paris\orm\ORMWrapper;
 
 /**
  * CouponingApi
  *
- * @property int    $id
- * @property int    $couponing_id
- * @property string $date
- * @property string $date_created
- * @property int    $valid
- * @property string $email
- * @property string $sum
- * @property string $market
+ * @property-read int    $id
+ * @property-read int    $couponing_id
+ * @property-read string $date
+ * @property-read string $date_created
+ * @property-read int    $valid
+ * @property-read string $email
+ * @property-read string $sum
+ * @property-read string $market
  */
 class CouponingApi extends Model
 {
