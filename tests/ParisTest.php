@@ -30,42 +30,42 @@ class ParisTest extends PHPUnit_Framework_TestCase
   {
     Model::factory('Simple')->find_many();
     $expected = 'SELECT * FROM `simple`';
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testComplexModelClassName()
   {
     Model::factory('ComplexModelClassName')->find_many();
     $expected = 'SELECT * FROM `complex_model_class_name`';
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testModelWithCustomTable()
   {
     Model::factory('ModelWithCustomTable')->find_many();
     $expected = 'SELECT * FROM `custom_table`';
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testCustomIDColumn()
   {
     Model::factory('ModelWithCustomTableAndCustomIdColumn')->find_one(5);
     $expected = "SELECT * FROM `custom_table` WHERE `custom_id_column` = '5' LIMIT 1";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testFilterWithNoArguments()
   {
     Model::factory('ModelWithFilters')->filter('name_is_fred')->find_many();
     $expected = "SELECT * FROM `model_with_filters` WHERE `name` = 'Fred'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testFilterWithArguments()
   {
     Model::factory('ModelWithFilters')->filter('name_is', 'Bob')->find_many();
     $expected = "SELECT * FROM `model_with_filters` WHERE `name` = 'Bob'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testInsertData()
@@ -75,7 +75,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $widget->age = 10;
     $widget->save();
     $expected = "INSERT INTO `simple` (`name`, `age`) VALUES ('Fred', '10')";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testUpdateData()
@@ -85,7 +85,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $widget->age = 10;
     $widget->save();
     $expected = "UPDATE `simple` SET `name` = 'Fred', `age` = '10' WHERE `id` = '1'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testDeleteData()
@@ -93,7 +93,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $widget = Model::factory('Simple')->find_one(1);
     $widget->delete();
     $expected = "DELETE FROM `simple` WHERE `id` = '1'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testInsertingDataContainingAnExpression()
@@ -104,7 +104,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $widget->set_expr('added', 'NOW()');
     $widget->save();
     $expected = "INSERT INTO `simple` (`name`, `age`, `added`) VALUES ('Fred', '10', NOW())";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testHasOneRelation()
@@ -113,7 +113,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $user = Model::factory('User')->find_one(1);
     $profile = $user->profile()->find_one();
     $expected = "SELECT * FROM `profile` WHERE `user_id` = '1' LIMIT 1";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue($profile instanceof Profile);
   }
 
@@ -123,7 +123,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $user2 = Model::factory('UserTwo')->find_one(1);
     $profile = $user2->profile()->find_one();
     $expected = "SELECT * FROM `profile` WHERE `my_custom_fk_column` = '1' LIMIT 1";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue($profile instanceof Profile);
   }
 
@@ -133,7 +133,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $user5 = Model::factory('UserFive')->find_one(1);
     $profile = $user5->profile()->find_one();
     $expected = "SELECT * FROM `profile` WHERE `my_custom_fk_column` = 'Fred' LIMIT 1";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue($profile instanceof Profile);
   }
 
@@ -146,7 +146,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $profile->user_id = 1;
     $user3 = $profile->user()->find_one();
     $expected = "SELECT * FROM `user` WHERE `id` = '1' LIMIT 1";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue($user3 instanceof User);
   }
 
@@ -157,7 +157,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $profile2->custom_user_fk_column = 5;
     $user4 = $profile2->user()->find_one();
     $expected = "SELECT * FROM `user` WHERE `id` = '5' LIMIT 1";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue($user4 instanceof User);
   }
 
@@ -168,7 +168,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $profile3->custom_user_fk_column = 'John Doe';
     $user4 = $profile3->user()->find_one();
     $expected = "SELECT * FROM `user` WHERE `name` = 'John Doe' LIMIT 1";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue($user4 instanceof User);
   }
 
@@ -178,7 +178,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $user3 = Model::factory('UserThree')->find_one(1);
     $posts = $user3->posts()->find_many();
     $expected = "SELECT * FROM `post` WHERE `user_three_id` = '1'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue($user3 instanceof UserThree);
     self::assertTrue(is_array($posts));
   }
@@ -189,7 +189,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $user4 = Model::factory('UserFour')->find_one(1);
     $posts = $user4->posts()->find_many();
     $expected = "SELECT * FROM `post` WHERE `my_custom_fk_column` = '1'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue(is_array($posts));
   }
 
@@ -199,7 +199,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $user6 = Model::factory('UserSix')->find_one(1);
     $posts = $user6->posts()->find_many();
     $expected = "SELECT * FROM `post` WHERE `my_custom_fk_column` = 'Fred'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
     self::assertTrue(is_array($posts));
   }
 
@@ -209,7 +209,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $book = Model::factory('Book')->find_one(1);
     $book->authors()->find_many();
     $expected = "SELECT `author`.* FROM `author` JOIN `author_book` ON `author`.`id` = `author_book`.`author_id` WHERE `author_book`.`book_id` = '1'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testHasManyThroughRelationWithCustomIntermediateModelAndKeyNames()
@@ -218,7 +218,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $book2 = Model::factory('BookTwo')->find_one(1);
     $book2->authors()->find_many();
     $expected = "SELECT `author`.* FROM `author` JOIN `author_book` ON `author`.`id` = `author_book`.`custom_author_id` WHERE `author_book`.`custom_book_id` = '1'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testHasManyThroughRelationWithCustomIntermediateModelAndKeyNamesAndCustomForeignKeyInBaseAndAssociatedTables()
@@ -228,7 +228,7 @@ class ParisTest extends PHPUnit_Framework_TestCase
     $book3->custom_book_id_in_book_table = 49;
     $book3->authors()->find_many();
     $expected = "SELECT `author`.* FROM `author` JOIN `author_book` ON `author`.`custom_author_id_in_author_table` = `author_book`.`custom_author_id` WHERE `author_book`.`custom_book_id` = '49'";
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testHasManyThroughRelationWithCustomIntermediateModelAndKeyNamesAndCustomForeignKeyInAssociatedTable()
@@ -239,11 +239,11 @@ class ParisTest extends PHPUnit_Framework_TestCase
     /* @var $authors \Tests3\Author[] */
     $authors = $book4->authors()->find_many();
 
-    self::assertEquals('Fred', $authors[0]->get('name'));
+    self::assertSame('Fred', $authors[0]->get('name'));
 
     $expected = "SELECT `author`.* FROM `author` JOIN `author_book` ON `author`.`custom_author_id_in_author_table` = `author_book`.`custom_author_id` WHERE `author_book`.`custom_book_id` = '1'";
 
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testHasManyThroughRelationWithCustomIntermediateModelAndKeyNamesAndCustomForeignKeyInBaseTable()
@@ -255,11 +255,11 @@ class ParisTest extends PHPUnit_Framework_TestCase
     /* @var $authors \Tests3\Author[] */
     $authors = $book5->authors()->find_many();
 
-    self::assertEquals('Fred', $authors[0]->get('name'));
+    self::assertSame('Fred', $authors[0]->get('name'));
 
     $expected = "SELECT `author`.* FROM `author` JOIN `author_book` ON `author`.`id` = `author_book`.`custom_author_id` WHERE `author_book`.`custom_book_id` = '49'";
 
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testFindResultSet()

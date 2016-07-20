@@ -57,7 +57,7 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
     // test
     $lastQuery = ORM::get_last_query();
     $expected = 'INSERT INTO `tracking_couponing` (`id`, `couponing_id`, `valid`, `email`, `market`, `date`, `date_created`, `sum`) VALUES (\'666\', \'123\', \'1\', \'max.mustermann@beispiel.de\', \'FooBar\', \'2016-03-30 12:17:00\', \'2016-04-28\', \'13.37\')';
-    self::assertEquals($expected, $lastQuery);
+    self::assertSame($expected, $lastQuery);
 
     if (
         isset($array['fields']['Universal'])
@@ -77,11 +77,11 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
         if ($product === 'product1') {
           $lastQuery = ORM::get_last_query();
           $expected = 'INSERT INTO `tracking_couponing_universal_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'product1\', \'1\', \'666\')';
-          self::assertEquals($expected, $lastQuery);
+          self::assertSame($expected, $lastQuery);
         } elseif ($product === 'product2') {
           $lastQuery = ORM::get_last_query();
           $expected = 'INSERT INTO `tracking_couponing_universal_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'product2\', \'4\', \'666\')';
-          self::assertEquals($expected, $lastQuery);
+          self::assertSame($expected, $lastQuery);
         }
 
       }
@@ -103,7 +103,7 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
 
         $lastQuery = ORM::get_last_query();
         $expected = 'INSERT INTO `tracking_couponing_special_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'Foo\', \'3\', \'666\')';
-        self::assertEquals($expected, $lastQuery);
+        self::assertSame($expected, $lastQuery);
       }
     }
 

@@ -40,7 +40,7 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
     self::assertInternalType('null', Model::$auto_prefix_models);
     Model::$auto_prefix_models = $model_prefix;
     self::assertInternalType('string', Model::$auto_prefix_models);
-    self::assertEquals($model_prefix, Model::$auto_prefix_models);
+    self::assertSame($model_prefix, Model::$auto_prefix_models);
     Model::$auto_prefix_models = null;
     self::assertInternalType('null', Model::$auto_prefix_models);
   }
@@ -50,7 +50,7 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
     Model::$auto_prefix_models = null;
     Model::factory('Simple')->find_many();
     $expected = 'SELECT * FROM `simple`';
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testPrefixOnAutoTableName()
@@ -58,7 +58,7 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
     Model::$auto_prefix_models = 'MockPrefix_';
     Model::factory('Simple')->find_many();
     $expected = 'SELECT * FROM `mock_prefix_simple`';
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
   public function testPrefixOnAutoTableNameWithTableSpecified()
@@ -66,7 +66,7 @@ class ModelPrefixingTest extends PHPUnit_Framework_TestCase
     Model::$auto_prefix_models = 'MockPrefix_';
     Model::factory('TableSpecified')->find_many();
     $expected = 'SELECT * FROM `simple`';
-    self::assertEquals($expected, ORM::get_last_query());
+    self::assertSame($expected, ORM::get_last_query());
   }
 
 }

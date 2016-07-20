@@ -62,7 +62,7 @@ namespace {
       /* @var $tags \PHPProject\Models\Tag[] */
       $tags = $video->tags()->find_many();
 
-      self::assertEquals('foobar', $tags[0]::foobar());
+      self::assertSame('foobar', $tags[0]::foobar());
       self::assertArrayHasKey('id', $tags[0]->as_array());
       self::assertArrayHasKey('name', $tags[0]->as_array());
     }

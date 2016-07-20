@@ -35,7 +35,7 @@ namespace Paris\Tests {
       Model::$auto_prefix_models = null;
       Model::factory('\Tests\Simple')->find_many();
       $expected = 'SELECT * FROM `tests_simple`';
-      self::assertEquals($expected, ORM::get_last_query());
+      self::assertSame($expected, ORM::get_last_query());
     }
 
     public function testPrefixOnAutoTableName()
@@ -43,7 +43,7 @@ namespace Paris\Tests {
       Model::$auto_prefix_models = '\\Tests\\';
       Model::factory('Simple')->find_many();
       $expected = 'SELECT * FROM `tests_simple`';
-      self::assertEquals($expected, ORM::get_last_query());
+      self::assertSame($expected, ORM::get_last_query());
     }
 
     public function testPrefixOnAutoTableNameWithTableSpecified()
@@ -51,7 +51,7 @@ namespace Paris\Tests {
       Model::$auto_prefix_models = '\\Tests\\';
       Model::factory('TableSpecified')->find_many();
       $expected = 'SELECT * FROM `simple`';
-      self::assertEquals($expected, ORM::get_last_query());
+      self::assertSame($expected, ORM::get_last_query());
     }
 
     public function testNamespacePrefixSwitching()
@@ -59,12 +59,12 @@ namespace Paris\Tests {
       Model::$auto_prefix_models = '\\Tests\\';
       Model::factory('TableSpecified')->find_many();
       $expected = 'SELECT * FROM `simple`';
-      self::assertEquals($expected, ORM::get_last_query());
+      self::assertSame($expected, ORM::get_last_query());
 
       Model::$auto_prefix_models = '\\Tests2\\';
       Model::factory('TableSpecified')->find_many();
       $expected = 'SELECT * FROM `simple`';
-      self::assertEquals($expected, ORM::get_last_query());
+      self::assertSame($expected, ORM::get_last_query());
     }
 
     public function testPrefixOnHasManyThroughRelation()
@@ -74,8 +74,8 @@ namespace Paris\Tests {
       $book = Model::factory('Book')->find_one(1);
       $authors = $book->authors()->find_many();
       $expected = "SELECT `prefix_author`.* FROM `prefix_author` JOIN `prefix_authorbook` ON `prefix_author`.`id` = `prefix_authorbook`.`prefix_author_id` WHERE `prefix_authorbook`.`prefix_book_id` = '1'";
-      self::assertEquals($expected, ORM::get_last_query());
-      self::assertEquals(true, $authors[0] instanceof Model);
+      self::assertSame($expected, ORM::get_last_query());
+      self::assertSame(true, $authors[0] instanceof Model);
     }
 
     public function testPrefixOnHasManyThroughRelationWithCustomIntermediateModelAndKeyNames()
@@ -85,8 +85,8 @@ namespace Paris\Tests {
       $book2 = Model::factory('BookTwo')->find_one(1);
       $authors2 = $book2->authors()->find_many();
       $expected = "SELECT `prefix_author`.* FROM `prefix_author` JOIN `prefix_authorbook` ON `prefix_author`.`id` = `prefix_authorbook`.`custom_author_id` WHERE `prefix_authorbook`.`custom_book_id` = '1'";
-      self::assertEquals($expected, ORM::get_last_query());
-      self::assertEquals(true, $authors2[0] instanceof Model);
+      self::assertSame($expected, ORM::get_last_query());
+      self::assertSame(true, $authors2[0] instanceof Model);
     }
   }
 }
