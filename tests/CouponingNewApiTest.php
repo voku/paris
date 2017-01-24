@@ -8,11 +8,11 @@ use paris\orm\Model;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Class CouponingApiTest
+ * Class CouponingNewApiTest
  *
  * @package Paris\Tests
  */
-class CouponingApiTest extends PHPUnit_Framework_TestCase
+class CouponingNewApiTest extends PHPUnit_Framework_TestCase
 {
   public function testInsert()
   {
@@ -40,8 +40,8 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
 
     // ----------------------------
 
-    /* @var $orm \Paris\Tests\CouponingApi */
-    $orm = Model::factory('\Paris\Tests\CouponingApi')->create();
+    /* @var $orm \Paris\Tests\CouponingNewApi */
+    $orm = Model::factory('\Paris\Tests\CouponingNewApi')->create();
 
     $orm->id = 666; // if we use a real DB, this will be a "AUTO_INCREMENT"-value
     $orm->setCouponingId($array['id']);
@@ -56,7 +56,7 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
 
     // test
     $lastQuery = ORM::get_last_query();
-    $expected = 'INSERT INTO `tracking_couponing` (`id`, `couponing_id`, `valid`, `email`, `market`, `date`, `date_created`, `sum`) VALUES (\'666\', \'123\', \'1\', \'max.mustermann@beispiel.de\', \'FooBar\', \'2016-03-30 12:17:00\', \'2016-04-28\', \'13.37\')';
+    $expected = 'INSERT INTO `paris_tests_couponing_new_api` (`id`, `couponing_id`, `valid`, `email`, `market`, `date`, `date_created`, `sum`) VALUES (\'666\', \'123\', \'1\', \'max.mustermann@beispiel.de\', \'FooBar\', \'2016-03-30 12:17:00\', \'2016-04-28\', \'13.37\')';
     self::assertSame($expected, $lastQuery);
 
     if (
@@ -65,7 +65,7 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
         is_array($array['fields']['Universal'])
     ) {
       foreach ($array['fields']['Universal'] as $product => $count) {
-        /* @var $ormTmp \Paris\Tests\CouponingApiSpecialProducts */
+        /* @var $ormTmp \Paris\Tests\CouponingNewApiSpecialProducts */
         $ormTmp = $orm->couponingApiUniversalProducts()->create();
         $ormTmp->setProduct($product);
         $ormTmp->setCount($count);
@@ -76,11 +76,11 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
         // test
         if ($product === 'product1') {
           $lastQuery = ORM::get_last_query();
-          $expected = 'INSERT INTO `tracking_couponing_universal_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'product1\', \'1\', \'666\')';
+          $expected = 'INSERT INTO `paris_tests_couponing_new_api_universal_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'product1\', \'1\', \'666\')';
           self::assertSame($expected, $lastQuery);
         } elseif ($product === 'product2') {
           $lastQuery = ORM::get_last_query();
-          $expected = 'INSERT INTO `tracking_couponing_universal_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'product2\', \'4\', \'666\')';
+          $expected = 'INSERT INTO `paris_tests_couponing_new_api_universal_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'product2\', \'4\', \'666\')';
           self::assertSame($expected, $lastQuery);
         }
 
@@ -93,7 +93,7 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
         is_array($array['fields']['Spezial'])
     ) {
       foreach ($array['fields']['Spezial'] as $product => $count) {
-        /* @var $ormTmp \Paris\Tests\CouponingApiSpecialProducts */
+        /* @var $ormTmp \Paris\Tests\CouponingNewApiSpecialProducts */
         $ormTmp = $orm->couponingApiSpecialProducts()->create();
         $ormTmp->setProduct($product);
         $ormTmp->setCount($count);
@@ -102,29 +102,29 @@ class CouponingApiTest extends PHPUnit_Framework_TestCase
         $ormTmp->save();
 
         $lastQuery = ORM::get_last_query();
-        $expected = 'INSERT INTO `tracking_couponing_special_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'Foo\', \'3\', \'666\')';
+        $expected = 'INSERT INTO `paris_tests_couponing_new_api_special_products` (`product`, `count`, `couponing_api_id_fk`) VALUES (\'Foo\', \'3\', \'666\')';
         self::assertSame($expected, $lastQuery);
       }
     }
 
     /**
-     * @var $ormCouponingApi \Paris\Tests\CouponingApi
+     * @var $ormCouponingApi \Paris\Tests\CouponingNewApi
      */
-    $ormCouponingApi = Model::factory('\Paris\Tests\CouponingApi')
+    $ormCouponingApi = Model::factory('\Paris\Tests\CouponingNewApi')
                             ->where_equal('kunde_id', (int)$orm->getId())
                             ->find_one();
 
     $lastQuery = ORM::get_last_query();
-    $expected = 'SELECT * FROM `tracking_couponing` WHERE `kunde_id` = \'' . (int)$orm->getId() . '\' LIMIT 1';
+    $expected = 'SELECT * FROM `paris_tests_couponing_new_api` WHERE `kunde_id` = \'' . (int)$orm->getId() . '\' LIMIT 1';
     self::assertSame($expected, $lastQuery);
 
     /**
-     * @var $ormSpecialProducts[] \Paris\Tests\CouponingApiSpecialProducts
+     * @var $ormSpecialProducts[] \Paris\Tests\CouponingNewApiSpecialProducts
      */
     $ormSpecialProducts = $ormCouponingApi->couponingApiSpecialProducts()->find_many();
 
     $lastQuery = ORM::get_last_query();
-    $expected = 'SELECT * FROM `tracking_couponing_special_products` WHERE `couponing_api_id_fk` = \'' . (int)$ormCouponingApi->id . '\'';
+    $expected = 'SELECT * FROM `paris_tests_couponing_new_api_special_products` WHERE `paris_tests_couponing_new_api_id` = \'' . (int)$ormCouponingApi->id . '\'';
     self::assertSame($expected, $lastQuery);
     self::assertTrue(is_array($ormSpecialProducts));
     self::assertTrue(is_array($ormSpecialProducts[0]->as_array()));

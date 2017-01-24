@@ -7,10 +7,10 @@ use paris\orm\Model;
 /**
  * CouponingApiUniversalProducts
  *
- * @property int    $id
- * @property int    $couponing_api_id_fk
- * @property string $product
- * @property int    $count
+ * @property-read int    $id
+ * @property-read int    $couponing_api_id_fk
+ * @property-read string $product
+ * @property-read int    $count
  */
 class CouponingApiUniversalProducts extends Model
 {
@@ -22,7 +22,7 @@ class CouponingApiUniversalProducts extends Model
   /**
    * @var string
    */
-  public static $_table = 'tracking_couponing_universal_products'; // this will be overwritten by the constructor
+  public static $_table = ''; // this will be overwritten by the constructor
 
   /**
    * __construct

@@ -5,7 +5,7 @@ namespace Paris\Tests;
 use paris\orm\Model;
 
 /**
- * CouponingApi
+ * CouponingNewApi
  *
  * @property-read int    $id
  * @property-read int    $couponing_id
@@ -16,26 +16,8 @@ use paris\orm\Model;
  * @property-read string $sum
  * @property-read string $market
  */
-class CouponingApi extends Model
+class CouponingNewApi extends Model
 {
-  /**
-   * @var bool
-   */
-  public static $_table_use_short_name = true;
-
-  /**
-   * @var string
-   */
-  public static $_table = ''; // this will be overwritten by the constructor
-
-  /**
-   * __construct
-   */
-  public function __construct()
-  {
-    static::$_table = 'tracking_couponing';
-  }
-
   /**
    * @return int
    */
@@ -161,7 +143,7 @@ class CouponingApi extends Model
    */
   public function couponingApiSpecialProducts()
   {
-    return $this->has_many('\Paris\Tests\CouponingApiSpecialProducts', 'couponing_api_id_fk', 'id');
+    return $this->has_many('\Paris\Tests\CouponingNewApiSpecialProducts');
   }
 
   /**
@@ -169,6 +151,6 @@ class CouponingApi extends Model
    */
   public function couponingApiUniversalProducts()
   {
-    return $this->has_many('\Paris\Tests\CouponingApiUniversalProducts', 'couponing_api_id_fk', 'id');
+    return $this->has_many('\Paris\Tests\CouponingNewApiUniversalProducts');
   }
 }

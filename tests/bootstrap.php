@@ -14,3 +14,7 @@ require_once __DIR__ . '/ModelsForTesting.php';
 require_once __DIR__ . '/CouponingApi.php';
 require_once __DIR__ . '/CouponingApiSpecialProducts.php';
 require_once __DIR__ . '/CouponingApiUniversalProducts.php';
+
+require_once __DIR__ . '/CouponingNewApi.php';
+require_once __DIR__ . '/CouponingNewApiSpecialProducts.php';
+require_once __DIR__ . '/CouponingNewApiUniversalProducts.php';

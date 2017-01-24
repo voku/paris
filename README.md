@@ -63,22 +63,34 @@ Let's See Some Code
 /**
  * User: a sample user-class
  *
- * @property int    $id
- * @property string $first_name
+ * @property-read int    $id
+ * @property-read string $first_name
  */
 class User extends Model {
   public function tweets() {
       return $this->has_many('Tweet');
+  }
+  
+  public function getId()
+  {
+    return $this->id;
+  }
+    
+  public function getFirstName()
+  {
+    return $this->first_name
   }
 }
 
 /**
  * Tweet: a sample twitter-class
  *
- * @property int    $id
- * @property string $text
+ * @property-read int    $id
+ * @property-read string $text
  */
-class Tweet extends Model {}
+class Tweet extends Model {
+  
+}
 
 $user = Model::factory('User')
   ->where_equal('username', 'j4mie')
