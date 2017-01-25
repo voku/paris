@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e46cf50ac9e142668e0d6b47a8ed7cdb)](https://www.codacy.com/app/voku/paris?utm_source=github.com&utm_medium=referral&utm_content=voku/paris&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/voku/paris.png?branch=master)](https://travis-ci.org/voku/paris)
 [![codecov.io](http://codecov.io/github/voku/paris/coverage.svg?branch=master)](http://codecov.io/github/voku/paris?branch=master)
 [![Codacy Badge](https://www.codacy.com/project/badge/e46cf50ac9e142668e0d6b47a8ed7cdb)](https://www.codacy.com/app/voku/paris)
