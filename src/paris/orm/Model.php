@@ -603,7 +603,7 @@ class Model
    * @param  null|string $foreign_key_name_in_associated_models_table
    * @param  null|string $connection_name
    *
-   * @return self|null
+   * @return ORM|null
    */
   protected function belongs_to($associated_class_name, $foreign_key_name = null, $foreign_key_name_in_associated_models_table = null, $connection_name = null)
   {
