@@ -2,6 +2,7 @@
 
 namespace paris\orm;
 
+use idiorm\orm\IdiormResultSet;
 use idiorm\orm\ORM;
 
 /**
@@ -56,7 +57,7 @@ use idiorm\orm\ORM;
  * @method void setClassName($class_name)
  * @method static ORMWrapper forTable($table_name, $connection_name = null)
  * @method Model findOne($id = null)
- * @method Array findMany()
+ * @method array|IdiormResultSet findMany()
  *
  * @package paris\orm
  */

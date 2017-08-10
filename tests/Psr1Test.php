@@ -130,20 +130,28 @@ class Psr1Test53 extends PHPUnit_Framework_TestCase
   {
     /* @var $book Book2 */
     $book = Model::factory('Book2')->findOne(1);
+    /* @var $authors Author2[] */
     $authors = $book->authors()->findMany();
     $expected = "SELECT `author2`.* FROM `author2` JOIN `author2book2` ON `author2`.`id` = `author2book2`.`author2_id` WHERE `author2book2`.`book2_id` = '1'";
     self::assertSame($expected, ORM::get_last_query());
     self::assertTrue(is_array($authors));
+    foreach ($authors as $author) {
+      self::assertInstanceOf('Author2', $author);
+    }
   }
 
   public function testHasManyThroughRelationWithCustomIntermediateModelAndKeyNames()
   {
     /* @var $book2 BookTwo2 */
     $book2 = Model::factory('BookTwo2')->findOne(1);
+    /* @var $authors Author2[] */
     $authors2 = $book2->authors()->findMany();
     $expected = "SELECT `author2`.* FROM `author2` JOIN `author_book2` ON `author2`.`id` = `author_book2`.`custom_author_id` WHERE `author_book2`.`custom_book_id` = '1'";
     self::assertSame($expected, ORM::get_last_query());
     self::assertTrue(is_array($authors2));
+    foreach ($authors as $author) {
+      self::assertInstanceOf('Author2', $author);
+    }
   }
 }
 
