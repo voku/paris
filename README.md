@@ -2,7 +2,8 @@
 [![codecov.io](http://codecov.io/github/voku/paris/coverage.svg?branch=master)](http://codecov.io/github/voku/paris?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e46cf50ac9e142668e0d6b47a8ed7cdb)](https://www.codacy.com/app/voku/paris?utm_source=github.com&utm_medium=referral&utm_content=voku/paris&utm_campaign=badger)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/92e21e1f-d31e-4449-92bf-f895ff87f7d2/mini.png)](https://insight.sensiolabs.com/projects/92e21e1f-d31e-4449-92bf-f895ff87f7d2)
-[![Latest Stable Version](https://poser.pugx.org/voku/paris/v/stable)](https://packagist.org/packages/voku/paris) 
+[![Latest Stable Version](https://poser.pugx.org/voku/paris/v/stable)](https://packagist.org/packages/voku/paris) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvoku%2Fparis.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fvoku%2Fparis?ref=badge_shield)
+
 [![Total Downloads](https://poser.pugx.org/voku/paris/downloads)](https://packagist.org/packages/voku/paris) 
 [![Latest Unstable Version](https://poser.pugx.org/voku/paris/v/unstable)](https://packagist.org/packages/voku/paris)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/voku/paris/badge.svg)](https://travis-ci.org/voku/paris)
@@ -103,3 +104,7 @@ foreach ($tweets as $tweet) {
   echo $tweet->text;
 }
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvoku%2Fparis.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fvoku%2Fparis?ref=badge_large)
