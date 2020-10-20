@@ -12,9 +12,9 @@
 
 [http://j4mie.github.com/idiormandparis/](http://j4mie.github.com/idiormandparis/)
 
-WARNING: this is only a Maintained-Fork of "https://github.com/j4mie/paris/"
+WARNING: this is only a Maintained-Fork from: "https://github.com/j4mie/paris/"
 
-INFO: you can use my Simple Active Record lib instad of Paris: https://github.com/voku/simple-active-record
+INFO: you can use my Simple Active Record lib instad of Paris: "https://github.com/voku/simple-active-record"
 
 ---
 ## Installation
